@@ -8,36 +8,31 @@ function findNumFrequency(array) {
 
 
     var freqmap = new Map();
+    var frequencyArray = [-1];
     array.forEach(element => {
         if( freqmap.get(element) ) {
             freqmap.set(element, freqmap.get(element) + 1);
+            frequencyArray[freqmap.get(element)] = element;
         } else {
             freqmap.set(element, 1);
+            frequencyArray[1] = element;
         }
     });
 
-    var numoccur = 1; 
-    var biggesOccurencyNum = -1; //When no occurencies -1 signals that no particular number is more frequent than the other
-    freqmap.forEach( (freq, num) =>  {
-        if( freq > numoccur ) {
-            biggesOccurencyNum = num;
-            numoccur = freq;
-        } else if( freq === numoccur && freq > 1) {
-            if( biggesOccurencyNum < num ) {
-                biggesOccurencyNum = num;
-            }
-        }
-    });
 
-    
-    return biggesOccurencyNum;
+    if( frequencyArray.length-1 === 1 )
+        return -1;
+    return frequencyArray[frequencyArray.length-1];
 }
 
-// findNumFrequency([4,2,3,4]);
+
+//findNumFrequency([4,2,3,4]);
 //*
 assert( findNumFrequency([]) === -1);
+assert( findNumFrequency([3]) === -1);
 assert( findNumFrequency([1,2,3,4]) === -1);
 assert( findNumFrequency([1,2,1,4]) === 1);
 assert( findNumFrequency([4,2,3,4]) === 4);
 assert( findNumFrequency([1,2,3,4,7,2,4,1,5,7,8]) === 7); // When more than one return biggest number
+console.log('All tests passed successfully');
 //*/
