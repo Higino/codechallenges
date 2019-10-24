@@ -4,18 +4,31 @@ var assert = require('assert');
 
 function palindrome (str) {
     var reverse = [];
-    var reverseIndex = str.length;
+    var norm = [];
+    var reverseIndex = str.length -1;
 
 
-    str.forEach((element, index) => {
+    for(var index=0; index < str.length-1 ; index++) {
+        reverse[index] = str[reverseIndex-index];
+        norm[index] = str[index];
+        if( index === reverseIndex - index-1 || index === reverseIndex - index) {
+            break;
+        }        
+    }
+    
+    /*str.forEach((element, index) => {
         reverse[reverseIndex-index-1] = element;
-    });
+        norm[index] = element;
+    });*/
 
+    console.log(norm);
+    console.log(reverse);
     for (var i = 0; i < str.length -1; i++) {
-        if( reverse[i] !== str[i] ) {
+        if( reverse[i] !== norm[i] ) {
             return false;
         }
     }
+
     return true;
 }
 
